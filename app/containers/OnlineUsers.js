@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import OnlineUsersItem from '../components/OnlineUsersItem'
-import { addOnlineUser } from '../actions/onlineUsers'
+import { addOnlineUser, userOffline } from '../actions/onlineUsers'
 
 
 class OnlineUsers extends Component {
@@ -10,7 +11,7 @@ class OnlineUsers extends Component {
         let data = []
 
         users.forEach(user => {
-            data.push(<OnlineUsersItem key={user.id} {...user} />)
+            data.push(<OnlineUsersItem key={user.id} id={user.id} name={user.username} avatar={user.picture.thumbnail} />)
         })
 
         return data
@@ -28,22 +29,28 @@ class OnlineUsers extends Component {
                 <div className="panel-body chat-box-online">
                     {this.getUserList(users)}
                 </div>
-                <button onClick={() => this.props.addOnlineUser({id: 100, avatar: 'https://randomuser.me/api/portraits/thumb/men/77.jpg', name: 'Name'})} >addOnlineUser</button>
+                <button onClick={() => this.props.addOnlineUser({id: Math.random(), avatar: 'https://randomuser.me/api/portraits/thumb/men/77.jpg', name: 'Name'})} >addOnlineUser</button>
             </div>
         )
     }
 }
 
-function mapStateToProps(state) {
-
-    console.log(state)
-
+const mapStateToProps = state => {
     return {
         users: state.onlineUsers
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        addOnlineUser: (user) => {
+            dispatch(addOnlineUser(user))
+        }
+    }
+}
+
+
 export default connect(
     mapStateToProps,
-    { addOnlineUser }
+    mapDispatchToProps
 )(OnlineUsers)

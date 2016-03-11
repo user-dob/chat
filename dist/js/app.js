@@ -22344,12 +22344,8 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this2 = this;
-
 	            var users = this.props.users;
 
-
-	            var count = 120;
 
 	            return _react2.default.createElement(
 	                'div',
@@ -22358,20 +22354,13 @@
 	                    'div',
 	                    { className: 'chat-box-online-head' },
 	                    'ONLINE USERS (',
-	                    count,
+	                    users.size,
 	                    ')'
 	                ),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'panel-body chat-box-online' },
 	                    this.getUserList(users)
-	                ),
-	                _react2.default.createElement(
-	                    'button',
-	                    { onClick: function onClick() {
-	                            return _this2.props.addOnlineUser({ id: Math.random(), avatar: 'https://randomuser.me/api/portraits/thumb/men/77.jpg', name: 'Name' });
-	                        } },
-	                    'addOnlineUser'
 	                )
 	            );
 	        }
@@ -22386,15 +22375,7 @@
 	    };
 	};
 
-	function mapDispatchToProps(dispatch) {
-	    return {
-	        addOnlineUser: function addOnlineUser(user) {
-	            dispatch((0, _onlineUsers.addOnlineUser)(user));
-	        }
-	    };
-	}
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(OnlineUsers);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(OnlineUsers);
 
 /***/ },
 /* 198 */

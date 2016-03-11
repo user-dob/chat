@@ -18,18 +18,14 @@ class OnlineUsers extends Component {
     }
 
     render() {
-
         const { users } = this.props
-
-        const count = 120
 
         return (
             <div className="chat-box-online-div">
-                <div className="chat-box-online-head">ONLINE USERS ({count})</div>
+                <div className="chat-box-online-head">ONLINE USERS ({users.size})</div>
                 <div className="panel-body chat-box-online">
                     {this.getUserList(users)}
                 </div>
-                <button onClick={() => this.props.addOnlineUser({id: Math.random(), avatar: 'https://randomuser.me/api/portraits/thumb/men/77.jpg', name: 'Name'})} >addOnlineUser</button>
             </div>
         )
     }
@@ -41,16 +37,6 @@ const mapStateToProps = state => {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        addOnlineUser: (user) => {
-            dispatch(addOnlineUser(user))
-        }
-    }
-}
-
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(OnlineUsers)
